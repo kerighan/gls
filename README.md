@@ -3,6 +3,7 @@
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+[You can read the explanation of the method here](https://medium.com/@mchenebaux/choosing-the-right-number-of-clusters-using-the-gaussian-likelihood-score-30bce5ad6eac).
 
 ### Prerequisites
 
