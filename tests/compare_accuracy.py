@@ -55,24 +55,36 @@ def find_optimal_number_of_clusters(points):
 
 
 def step(n_clusters):
+    # let's generate some data
     points = generate_data(n_clusters)
+    # let's find the optimal number of clusters
+    # according to each scoring method
     results = find_optimal_number_of_clusters(points)
-    
     n_clusters_silhouette = results[0]
     n_clusters_davies_bouldin = results[1]
     n_clusters_gaussian_likelihood = results[2]
     n_clusters_gaussian_likelihood_pca = results[3]
 
+    # check wether a method is right or not
     silhouette_right = n_clusters_silhouette == n_clusters
     davies_bouldin_right = n_clusters_davies_bouldin == n_clusters
     gaussian_likelihood_right = n_clusters_gaussian_likelihood == n_clusters
-    gaussian_likelihood_pca_right = n_clusters_gaussian_likelihood_pca == n_clusters
+    gaussian_likelihood_pca_right = n_clusters_gaussian_likelihood_pca \
+        == n_clusters
 
     return (silhouette_right, davies_bouldin_right,
             gaussian_likelihood_right, gaussian_likelihood_pca_right)
 
 
 def evaluate_scores(num_iter=1000):
+    """
+    1. randomly select a number of clusters.
+    2. generate blobs using this number
+    3. get the score of each method for all possible values of k
+    4. find the optimal k according to each method
+    5. add 1 to all successful guesses, 0 otherwise
+    6. compare accuracy
+    """
     accuracy_silhouette = 0
     accuracy_davies_bouldin = 0
     accuracy_gaussian_likelihood = 0
@@ -82,6 +94,7 @@ def evaluate_scores(num_iter=1000):
         k = np.random.randint(2, MAX_NUMBER_OF_CLUSTERS)
         results = step(k)
 
+        # add successful inference
         accuracy_silhouette += results[0]
         accuracy_davies_bouldin += results[1]
         accuracy_gaussian_likelihood += results[2]
@@ -91,6 +104,7 @@ def evaluate_scores(num_iter=1000):
     accuracy_davies_bouldin *= 100. / num_iter
     accuracy_gaussian_likelihood *= 100. / num_iter
     accuracy_gaussian_likelihood_pca *= 100. / num_iter
+
     print(accuracy_silhouette, "silhouette accuracy")
     print(accuracy_davies_bouldin, "Davies Bouldin accuracy")
     print(accuracy_gaussian_likelihood, "Gaussian Likelihood accuracy")

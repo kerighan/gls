@@ -3,6 +3,9 @@ from scipy.stats import norm
 from sklearn.decomposition import PCA
 
 
+__version__ = "1.0.0"
+
+
 def gaussian_likelihood_score(points, labels, resolution=50, pca=True):
     probability = 0
     n_clusters = len(np.unique(labels))
@@ -38,9 +41,6 @@ def gaussian_likelihood_score(points, labels, resolution=50, pca=True):
             if np.isnan(probability_axis_2):
                 probability_axis_2 = 0.
             probability += probability_axis_1 + probability_axis_2
-
-
-
     return probability
 
 
@@ -52,5 +52,4 @@ def find_best_cluster(scores):
     if dd[0] < 0:
         dd[0] = np.inf
     optimal_number = np.argmin(dd)
-
     return optimal_number
