@@ -8,6 +8,7 @@ tests/__pycache__/
 tests/*/__pycache__/
 tests/*.py[cod]
 tests/*$py.class
+.vscode
 
 # Distribution / packaging
 .Python
