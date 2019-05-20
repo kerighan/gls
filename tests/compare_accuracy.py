@@ -2,7 +2,6 @@ from sklearn.datasets import make_blobs
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import silhouette_score, davies_bouldin_score
 from metric import gaussian_likelihood_score, find_best_cluster
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 import numpy as np
 
@@ -108,7 +107,8 @@ def evaluate_scores(num_iter=1000):
     print(accuracy_silhouette, "silhouette accuracy")
     print(accuracy_davies_bouldin, "Davies Bouldin accuracy")
     print(accuracy_gaussian_likelihood, "Gaussian Likelihood accuracy")
-    print(accuracy_gaussian_likelihood_pca, "Gaussian Likelihood with PCA accuracy")
+    print(accuracy_gaussian_likelihood_pca,
+          "Gaussian Likelihood with PCA accuracy")
 
 
 if __name__ == "__main__":
